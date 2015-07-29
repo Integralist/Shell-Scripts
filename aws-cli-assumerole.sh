@@ -2,6 +2,9 @@
 #
 # Dependencies:
 #   brew install jq
+#
+# Execute:
+#   source aws-cli-assumerole.sh
 
 unset AWS_SESSION_TOKEN
 export AWS_ACCESS_KEY_ID=<user_access_key>
