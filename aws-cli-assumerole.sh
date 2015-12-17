@@ -5,11 +5,8 @@
 #
 # Setup:
 #   chmod +x ./aws-cli-assumerole.sh
-#   cp ./aws-cli-assumerole.sh /usr/local/bin/aws-cli-assumerole
 #
 # Execute:
-#   aws-cli-assumerole
-#     OR
 #   source ./aws-cli-assumerole.sh
 
 unset  AWS_SESSION_TOKEN
