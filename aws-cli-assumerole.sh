@@ -5,6 +5,10 @@
 #
 # Execute:
 #   source aws-cli-assumerole.sh
+#
+# Setup:
+# chmod +x ./aws-cli-assumerole.sh
+# cp ./aws-cli-assumerole.sh /usr/local/bin
 
 unset AWS_SESSION_TOKEN
 export AWS_ACCESS_KEY_ID=<user_access_key>
