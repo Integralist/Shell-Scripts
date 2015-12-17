@@ -13,6 +13,7 @@
 unset AWS_SESSION_TOKEN
 export AWS_ACCESS_KEY_ID=<user_access_key>
 export AWS_SECRET_ACCESS_KEY=<user_secret_key>
+export AWS_REGION=eu-west-1
 
 temp_role=$(aws sts assume-role \
                     --role-arn "arn:aws:iam::<aws_account_number>:role/<role_name>" \
