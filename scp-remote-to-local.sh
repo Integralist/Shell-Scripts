@@ -38,7 +38,7 @@ EOF
   exit 1
 fi
 
-logdir=$(mktemp -d logs.XXXX)
+logdir=$(mktemp -d "$component.logs.XXXX")
 
 data=($(curl --silent --cert $cert "$api/instances" | jq --raw-output ".[] | .id,.private_ip_address,.launch_time"))
 data_len=$((${#data[@]} / 3)) # we know we'll always have a triad of data -> <id>,<ip>,<launch_time>
