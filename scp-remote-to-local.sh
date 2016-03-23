@@ -44,20 +44,27 @@ fi
 
 logdir=$(mktemp -d logs.XXXX)
 
-data=($(curl --silent --cert $cert "$api/instances" | jq --raw-output ".[] | .id,.private_ip_address"))
-data_len=$((${#data[@]} / 2)) # we know we'll always have a pair of data -> <id>,<ip>
+data=($(curl --silent --cert $cert "$api/instances" | jq --raw-output ".[] | .id,.private_ip_address,.launch_time"))
+data_len=$((${#data[@]} / 3)) # we know we'll always have a triad of data -> <id>,<ip>,<launch_time>
 
 for ((n = 0; n < $data_len; n++))
 do
   ssh_success=false
   valid="current"
 
-  id=$(($n * 2))
+  # parse array indexes needed to extract data
+  id=$(($n * 3))
   ip=$(($id + 1))
+  ti=$(($id + 2))
 
   instance_id=${data[$id]}
   instance_ip=${data[$ip]}
+  launch_time=${data[$ti]}
 
+  printf "\n######################################\n"
+  printf "\nrequesting ssh access for: $instance_id\n"
+
+  # use cosmos api to generate ssh access token
   response=$(curl --silent \
                   --cert $cert \
                   --header "Content-Type: application/json" \
@@ -65,6 +72,7 @@ do
                   --data "{\"instance_id\":\"$instance_id\"}" \
                   "$api/logins/create")
 
+  # parse token from api response
   checkpoint_id=$(echo $response | jq --raw-output .url | cut -d '/' -f 7)
 
   until $ssh_success
@@ -74,16 +82,18 @@ do
     if [ "$status" = "$valid" ]; then
       ssh_success=true
       printf "\n"
-      echo "OK we've got SSH access to instance number $(($n + 1)): $instance_id ($instance_ip)"
+      echo "ssh access granted for instance $(($n + 1)): $instance_id ($instance_ip)"
       printf "\n"
     else
-      echo "Sorry, still waiting access to: $instance_id (status == $status)"
+      echo -ne "status == $status               "\\r
     fi
   done
 
-  scp -r "$user@$instance_ip,eu-west-1:/var/log/component/app.log" "./$logdir/$instance_ip.log" &
+  scp -r "$user@$instance_ip,eu-west-1:/var/log/component/app.log" "./$logdir/$launch_time-$instance_ip.log"
 done
 
-wait
+# removed 'wait' command here and '&' backgrounding of scp process
+# as stdout feedback was getting interleaved and really confusing
 
-echo "Complete"
+printf "\n######################################\n\n"
+echo "all logs copied successfully"
