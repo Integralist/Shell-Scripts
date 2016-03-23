@@ -18,6 +18,7 @@ IFS=$'\n\t'
 cert=${1:-}
 component=${2:-}
 user=${3:-}
+failed_access=()
 api="https://api.live.bbc.co.uk/cosmos/env/test/component/$component"
 
 if [ "$#" -ne 3 ]; then
@@ -33,6 +34,10 @@ If you have any curl/cert issues try:
 
 If you have any parsing issues try:
   brew install jq
+
+If you have any issues with SCP then
+make sure you've given your user SSH access via Cosmos.
+This is something I'd like to automate via this script in future.
 EOF
 
   exit 1
@@ -46,7 +51,7 @@ data_len=$((${#data[@]} / 3)) # we know we'll always have a triad of data -> <id
 for ((n = 0; n < $data_len; n++))
 do
   ssh_success=false
-  valid="current"
+  failed=false
 
   # parse array indexes needed to extract data
   id=$(($n * 3))
@@ -75,17 +80,25 @@ do
   do
     status=$(curl --silent --cert $cert "$api/login/$checkpoint_id" | jq --raw-output .status)
 
-    if [ "$status" = "$valid" ]; then
+    if [ "$status" = "current" ]; then
       ssh_success=true
       printf "\n"
       echo "ssh access granted for instance $(($n + 1)): $instance_id ($instance_ip)"
       printf "\n"
+    elif [ "$status" = "failed" ]; then
+      failed_access+=($instance_id $instance_ip $launch_time)
+      failed=true
+      break
     else
       echo -ne "status == $status               "\\r
     fi
   done
 
-  scp -r "$user@$instance_ip,eu-west-1:/var/log/component/app.log" "./$logdir/$launch_time-$instance_ip.log"
+  if [ "$failed" = true ]; then
+    continue
+  else
+    scp -r "$user@$instance_ip,eu-west-1:/var/log/component/app.log" "./$logdir/$launch_time-$instance_ip.log"
+  fi
 done
 
 # removed 'wait' command here and '&' backgrounding of scp process
@@ -93,3 +106,14 @@ done
 
 printf "\n######################################\n\n"
 echo "all logs copied successfully"
+
+failed_len=$(echo ${#failed_access[@]})
+if [ "$failed_len" -gt 0 ]; then
+  printf "\n######################################\n\n"
+  echo "there were '$failed_len' failed ssh attempts"
+
+  for i in "${failed_access[@]}"
+  do
+    printf "\t - $i\n"
+  done
+fi
