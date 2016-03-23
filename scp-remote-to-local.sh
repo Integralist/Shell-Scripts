@@ -34,10 +34,6 @@ If you have any curl/cert issues try:
 
 If you have any parsing issues try:
   brew install jq
-
-If you have any issues with SCP then
-make sure you've given your user SSH access via Cosmos.
-This is something I'd like to automate via this script in future.
 EOF
 
   exit 1
