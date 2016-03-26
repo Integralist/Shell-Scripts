@@ -1,3 +1,3 @@
 # Shell Scripts
 
-Collection of shell scripts and executable binaries
+Collection of custom utility shell scripts
