@@ -32,7 +32,7 @@ echo /usr/local/bin/bash | sudo tee -a /etc/shells
 chsh -s /usr/local/bin/bash
 
 # Configure Bash
-curl https://raw.githubusercontent.com/Integralist/dotfiles/master/.bashrc -o ~/.bashrc
+curl -LSso ~/.bashrc https://raw.githubusercontent.com/Integralist/dotfiles/master/.bashrc
 
 cat > ~/.bash_profile <<EOF
 if [ -f $HOME/.bashrc ]; then
@@ -102,7 +102,7 @@ do
 done
 
 # Configure Git
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+curl -LSso ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 
 cat > ~/.gitignore-global <<EOF
 # bundler
@@ -155,4 +155,4 @@ git config --global user.name Integralist
 
 # Miscellaneous
 echo --color --format documentation --format=Nc > ~/.rspec
-curl https://raw.githubusercontent.com/Integralist/dotfiles/master/.tmux.conf -o ~/.tmux.conf
+curl -LSso ~/.tmux.conf https://raw.githubusercontent.com/Integralist/dotfiles/master/.tmux.conf
