@@ -71,6 +71,7 @@ brew install curl --with-openssl --with-nghttp2 && brew link curl --force
 
 # Install other brew packages
 packages=(\
+  argon/mas/mas\
   bash-completion\
   bundler-completion\
   docker-compose-completion\
@@ -157,6 +158,12 @@ git config --global push.default upstream
 git config --global url.git@github.com:.insteadof https://github.com/
 git config --global user.email mark.mcdx@gmail.com
 git config --global user.name Integralist
+
+# Install applications from Mac App Store
+mas installed 411246225 # Caffeine
+mas installed 458034879 # Dash
+mas installed 549083868 # Display Menu
+mas installed 409789998 # Twitter
 
 # Miscellaneous
 echo --color --format documentation --format=Nc > ~/.rspec
