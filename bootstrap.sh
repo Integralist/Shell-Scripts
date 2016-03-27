@@ -61,6 +61,11 @@ curl -LSso ~/usr/local/bin/voom https://raw.githubusercontent.com/airblade/voom/
 alias voom="VIM_DIR=~/.vim voom"
 voom
 
+vim -E -s <<EOF
+:set spell
+:quit
+EOF
+
 # Install Curl with OpenSSL and HTTP2
 brew install curl --with-openssl --with-nghttp2 && brew link curl --force
 
@@ -156,3 +161,5 @@ git config --global user.name Integralist
 # Miscellaneous
 echo --color --format documentation --format=Nc > ~/.rspec
 curl -LSso ~/.tmux.conf https://raw.githubusercontent.com/Integralist/dotfiles/master/.tmux.conf
+curl -LSso ~/smyck.terminal https://raw.githubusercontent.com/Integralist/dotfiles/master/terminal-themes/Smyck.terminal
+open ~/smyck.terminal
