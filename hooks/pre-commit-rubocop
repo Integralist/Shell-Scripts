@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# 1. Rename to pre-commit
+# 2. Copy to .git/hooks/pre-commit
+
+docker ps 2> /dev/null
+
+if [ $? -ne 0 ]; then
+  echo "Check that docker is running correctly"
+  exit 1
+fi
+
+app="$(git rev-parse --show-toplevel)/src"
+
+errors=$(\
+  docker run \
+    --cpu-shares 1024 \
+    --rm=true \
+    --volume $app:/app \
+    bbcnews/rubocop-config --format simple --fail-level F 2> /dev/null | grep '^F:\|==' | wc -l)
+
+if [ $errors -gt 0 ]; then
+  echo "Rubocop reported errors. Please double check your code"
+  exit 1
+fi
