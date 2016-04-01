@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Dependencies:
+#   brew install argon/mas/mas
 
 # Enable a form of 'strict mode' for Bash
 set -euo pipefail
