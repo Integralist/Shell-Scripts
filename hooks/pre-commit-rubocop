@@ -17,7 +17,7 @@ errors=$(\
     --cpu-shares 1024 \
     --rm=true \
     --volume $app:/app \
-    bbcnews/rubocop-config --format simple --fail-level F 2> /dev/null | grep '^F:' | wc -l | tr -d '[[:space:]])
+    bbcnews/rubocop-config --format simple --fail-level F 2> /dev/null | grep '^F:' | wc -l | tr -d '[[:space:]]')
 
 if [ $errors -gt 0 ]; then
   echo "Rubocop reported $errors errors. Please double check your code"
