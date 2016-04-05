@@ -1,7 +1,4 @@
 #!/bin/bash
-#
-# Dependencies:
-#   brew install argon/mas/mas
 
 # Enable a form of 'strict mode' for Bash
 set -euo pipefail
@@ -96,6 +93,7 @@ packages=(\
   ruby-build\
   siege\
   sift\
+  speedtest-cli\
   terminal-notifier\
   the_silver_searcher\
   tmate\
