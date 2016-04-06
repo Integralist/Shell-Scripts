@@ -1,14 +1,14 @@
 #!/bin/bash
 #
 # Dependencies:
-# brew install jq
+#   brew install jq
 #
 # Example:
-# /bin/bash ./results.sh <cert_path> <component_name> <cosmos_user>
+#   /bin/bash ./results.sh <cert_path> <component_name> <cosmos_user>
 #
 # Description:
-# Grabs list of running instances for specified Cosmos component (TEST environment)
-# SCP's known log locations from remote to new local directory
+#   Grabs list of running instances for specified Cosmos component (TEST environment)
+#   SCP's known log locations from remote to new local directory
 
 # Enable a form of 'strict mode' for Bash
 set -euo pipefail
@@ -82,7 +82,7 @@ do
       echo "ssh access granted for instance $(($n + 1)): $instance_id ($instance_ip)"
       printf "\n"
     elif [ "$status" = "failed" ]; then
-      failed_access+=($instance_id $instance_ip $launch_time)
+      failed_access+=("$instance_id - $instance_ip - $launch_time")
       failed=true
       break
     else
