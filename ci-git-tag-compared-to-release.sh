@@ -1,3 +1,5 @@
+echo 0 > status
+
 latest_release=$(curl \
                     --cert /etc/pki/tls/certs/client.crt \
                     --key /etc/pki/tls/private/client.key \
