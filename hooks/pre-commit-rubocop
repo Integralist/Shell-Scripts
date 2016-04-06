@@ -3,7 +3,7 @@
 # 1. Rename to pre-commit
 # 2. Copy to .git/hooks/pre-commit
 
-docker ps 2> /dev/null
+docker ps 1> /dev/null 2>&1
 
 if [ $? -ne 0 ]; then
   echo "Check that docker is running correctly"
