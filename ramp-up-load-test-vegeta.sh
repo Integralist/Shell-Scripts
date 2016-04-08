@@ -2,7 +2,8 @@
 #
 # Example: time /bin/bash ./ramp.sh
 #
-# Every 5 minutes (300 seconds) we'll increase the number of concurrent users by 50
+# Every iteration we'll increase the number of concurrent users by 50
+# Each iteration adds an aditional 5 minutes (300s)
 # So after 75 minutes we'll reach our final iteration
 # Which will then run for 30mins and will push through 300 concurrent requests a second over that period
 # So on the last iteration we'll hit the service 540,000 times over the last 30 minutes period (300*1800)
