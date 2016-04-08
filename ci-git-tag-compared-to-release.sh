@@ -1,3 +1,15 @@
+#!/bin/bash
+#
+# Example:
+#   /bin/bash ./ci-git-tag-compared-to-release.sh
+#
+# Description:
+#   This script isn't intended to be run standalone but within a Jenkins CI shell execution block
+#   It gets a release number from an external service (you'd have to one, otherwise this script is useless to you)
+#   It then checks the current git tag to see if it's larger than the 'release' number
+#   If it is then it'll go ahead and build a new 'release'
+#   It's purpose is to prevent builds occuring for simple README style changes within a GitHub repository
+
 echo 0 > status
 
 latest_release=$(curl \
