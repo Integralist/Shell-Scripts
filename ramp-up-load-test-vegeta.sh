@@ -1,12 +1,14 @@
 #!/bin/bash
 #
-# Example: time /bin/bash ./ramp.sh
+# Example:
+#   time /bin/bash ./ramp.sh
 #
-# Every iteration we'll increase the number of concurrent users by 50
-# Each iteration adds an aditional 5 minutes (300s)
-# So after 75 minutes we'll reach our final iteration
-# Which will then run for 30mins and will push through 300 concurrent requests a second over that period
-# So on the last iteration we'll hit the service 540,000 times over the last 30 minutes period (300*1800)
+# Description:
+#   Every iteration we'll increase the number of concurrent users by 50
+#   Each iteration adds an aditional 5 minutes (300s)
+#   So after 75 minutes we'll reach our final iteration
+#   Which will then run for 30mins and will push through 300 concurrent requests a second over that period
+#   So on the last iteration we'll hit the service 540,000 times over the last 30 minutes period (300*1800)
 
 rates=(50 100 150 200 250 300)
 durations=(300s 600s 900s 1200s 1500s 1800s)
