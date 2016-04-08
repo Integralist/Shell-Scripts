@@ -1,3 +1,12 @@
+#!/bin/bash
+#
+# Example:
+#   /bin/bash ./watchtower.sh
+#
+# Description:
+#   Curls the specified URLs in parallel and checks their response status codes
+#   It then sends any non-200 status code responses to Slack
+
 function cleanup() {
   rm results.txt
   rm temp.txt
