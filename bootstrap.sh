@@ -99,6 +99,7 @@ packages=(\
   tmate\
   tmux\
   tree\
+  urlview\
   watch\
   wget\
   wireshark\
@@ -167,6 +168,7 @@ mas installed 549083868 # Display Menu
 mas installed 409789998 # Twitter
 
 # Miscellaneous
+echo COMMAND open %s > ~/.urlview
 echo --color --format documentation --format=Nc > ~/.rspec
 curl -LSso ~/.tmux.conf https://raw.githubusercontent.com/Integralist/dotfiles/master/.tmux.conf
 curl -LSso ~/smyck.terminal https://raw.githubusercontent.com/Integralist/dotfiles/master/terminal-themes/Smyck.terminal
