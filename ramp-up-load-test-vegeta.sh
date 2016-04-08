@@ -13,7 +13,7 @@ durations=(300s 600s 900s 1200s 1500s 1800s)
 url="https://routing.mozart.test.api.bbci.co.uk/news/topics/2611f753-ece7-47ea-9782-f912bc1e4088/film"
 
 for i in $(seq 0 5); do
-   printf "\t- rate: ${rates[$i]} rps | duration: $((${durations[$i]} / 60))\n"
+   printf "\t- rate: ${rates[$i]} rps | duration: $((${durations[$i]} / 60)) mins\n"
    echo "GET $url" | ./vegeta attack -rate="${rates[$i]}" -duration="${durations[$i]}" -insecure > "results-${i}.bin"
 done
 
