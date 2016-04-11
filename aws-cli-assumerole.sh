@@ -8,6 +8,9 @@
 #
 # Execute:
 #   source ./aws-cli-assumerole.sh
+#
+# Description:
+#   Makes assuming an AWS IAM role (+ exporting new temp keys) easier
 
 unset  AWS_SESSION_TOKEN
 export AWS_ACCESS_KEY_ID=<user_access_key>
