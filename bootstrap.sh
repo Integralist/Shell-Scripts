@@ -1,4 +1,16 @@
 #!/bin/bash
+#
+# Example:
+#   /bin/bash bootstrap.sh
+#
+# Description:
+#   Configures Mac OS X settings
+#   Installs baseline dependencies (e.g. XCode and Homebrew) required to facilitate further installations
+#   Updates and configures the Bash shell
+#   Homebrew used to install the majority of packages and applications
+#   Configure git version control
+#   Install remaining apps from Mac App Store
+#   Some final miscellaneous configuration
 
 # Enable a form of 'strict mode' for Bash
 set -euo pipefail
