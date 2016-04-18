@@ -10,7 +10,8 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-app="$(git rev-parse --show-toplevel)/src"
+# BE CAREFUL HERE...
+app="$(git rev-parse --show-toplevel)/src" # check /src either exists or doesn't need to be changed
 
 errors=$(\
   docker run \
