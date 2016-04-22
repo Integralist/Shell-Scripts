@@ -34,7 +34,7 @@ EOF
 fi
 
 # check the jq dependency is available
-type foo >/dev/null 2>&1 || { printf >&2 "\nThe jq dependency is missing. Please first run 'brew install jq'\n"; exit 1; }
+type jq >/dev/null 2>&1 || { printf >&2 "\nThe jq dependency is missing. Please first run 'brew install jq'\n"; exit 1; }
 
 instances=($(curl --silent --cert $cert "$api/instances" | jq --raw-output ".[] | .id,.private_ip_address"))
 num_of_instances=$((${#instances[@]} / 2)) # we know the data arrives in a pair: <id>,<ip>
