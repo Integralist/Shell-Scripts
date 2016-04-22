@@ -44,7 +44,6 @@ ssh_success=false
 instance_id=${instances[0]}
 instance_ip=${instances[1]}
 
-printf "\n######################################\n"
 printf "\nrequesting ssh access for: $instance_id\n\n"
 
 # use cosmos api to generate ssh access token
@@ -64,9 +63,7 @@ do
 
   if [ "$status" = "$valid" ]; then
     ssh_success=true
-    printf "\n"
-    echo "ssh access granted for instance: $instance_id ($instance_ip)"
-    printf "\n"
+    printf "\n\nssh access granted for instance: $instance_id ($instance_ip)\n\n"
   else
     echo -ne "status == $status               "\\r
   fi
@@ -77,5 +74,4 @@ ssh -t "$instance_ip,eu-west-1" "sudo chown -R $user:$user /tmp/config.json"
 scp -r "$user@$instance_ip,eu-west-1:/tmp/config.json" "$local_config"
 ssh -t "$instance_ip,eu-west-1" "sudo rm /tmp/config.json"
 
-printf "\n######################################\n\n"
 echo "Cosmos configuration file copied successfully to $local_config"
