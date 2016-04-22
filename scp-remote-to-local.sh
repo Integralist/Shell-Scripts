@@ -78,9 +78,7 @@ do
 
     if [ "$status" = "current" ]; then
       ssh_success=true
-      printf "\n"
-      echo "ssh access granted for instance $(($n + 1)): $instance_id ($instance_ip)"
-      printf "\n"
+      printf "\n\nssh access granted for instance $(($n + 1)): $instance_id ($instance_ip)\n\n"
     elif [ "$status" = "failed" ]; then
       failed_access+=("$instance_id - $instance_ip - $launch_time")
       failed=true
