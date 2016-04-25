@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Example:
-#   /bin/bash ./ci-git-tag-compared-to-release.sh
+#   /bin/bash ./git-tag-compared-to-release.sh
 #
 # Description:
 #   This script isn't intended to be run standalone but within a Jenkins CI shell execution block
