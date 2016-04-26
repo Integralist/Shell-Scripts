@@ -1,27 +1,31 @@
+if [ $(cat status) -eq 1 ]; then
+  exit
+fi
+
 printf "\nPull Golang Container 1.6.2\n\n"
 
-	CONTAINER_WS=/gopath/src/github.com/integralsit/go-app/src
+	CONTAINER_WS=/gopath/src/github.com/bbc/mozart-requester/src
 
 	docker pull golang:1.6.2
 
-printf "\nInstall Dependencies\n\n"
+printf "\nInstall Dependencies and Run Tests\n\n"
 
 	docker run --rm=true -v $WORKSPACE/src:$CONTAINER_WS -e "GOPATH=/gopath" -w $CONTAINER_WS golang:1.6.2 \
-	  sh -c 'go get github.com/Masterminds/glide && /gopath/bin/glide install'
-  
+	  sh -c 'go get github.com/Masterminds/glide && /gopath/bin/glide install && go test $(/gopath/bin/glide novendor)'
+      
 printf "\nCompile Application Binary\n\n"
 
 	docker run --rm=true -v $WORKSPACE/src:$CONTAINER_WS -e "GOPATH=/gopath" -w $CONTAINER_WS golang:1.6.2 \
-	  sh -c 'CGO_ENABLED=0 go build -a --installsuffix cgo --ldflags=\"-s\" -o go-app-binary'
+	  sh -c 'CGO_ENABLED=0 go build -a --installsuffix cgo --ldflags=\"-s\" -o mozart-requester'
 
 printf "\nMove Binary to SOURCES\n\n"
 
-	mv src/go-app-binary SOURCES
+	mv src/mozart-requester SOURCES
+    
+printf "\nPull MBT Container\n\n"
 
-printf "\nPull Custom Build Container\n\n"
-
-	docker pull registry.bbc.co.uk/custom-build
+	docker pull registry.news.api.bbci.co.uk/mbt-build
 
 printf "\nBuild RPM\n\n"
 
-	custom-build --os=centos7 -s docker -i registry.bbc.co.uk/custom-build
+	cosmos-build --os=centos7 -s docker -i registry.news.api.bbci.co.uk/mbt-build
