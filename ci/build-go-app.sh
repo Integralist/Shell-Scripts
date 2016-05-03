@@ -10,7 +10,7 @@ printf "\nPull Golang Container 1.6.2\n\n"
 
 printf "\nInstall Dependencies and Run Tests\n\n"
 
-	docker run --rm=true -v $WORKSPACE/src:$CONTAINER_WS -e "GOPATH=/gopath" -w $CONTAINER_WS golang:1.6.2 \
+	docker run --rm=true -v $WORKSPACE/src:$CONTAINER_WS -e "GOPATH=/gopath" -e "APP_ENV=test" -w $CONTAINER_WS golang:1.6.2 \
 	  sh -c 'go get github.com/Masterminds/glide && /gopath/bin/glide install && go test $(/gopath/bin/glide novendor)'
       
 printf "\nCompile Application Binary\n\n"
