@@ -25,6 +25,12 @@ latest_release=$(curl \
 
 tag=$(git tag | tail -n 1)
 
+# you might have an issue where numbers are:
+# 10, 1, 2, 3, 4, 5, 6, 7, 8, 9
+#
+# so you need to sort the numbers first:
+# tag=$(git tag | sort -g | tail -n 1)
+
 if [ $tag -le $latest_release ]; then
   echo 1 > status
   echo "The latest tag ($tag) is less than, or equal to, the latest release ($latest_release) so no point in building a new release"
