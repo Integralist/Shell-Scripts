@@ -4,7 +4,7 @@
 #   brew install jq
 #
 # Example:
-#   /bin/bash ./results.sh <cert_path> <component_name> <cosmos_user>
+#   /bin/bash ./scp-remote-to-local.sh <cert_path> <component_name> <cosmos_user>
 #
 # Description:
 #   Grabs list of running instances for specified Cosmos component (TEST environment)
