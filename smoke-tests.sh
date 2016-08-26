@@ -1,3 +1,12 @@
+#!/bin/bash
+#
+# Example:
+#   /bin/bash ./smoke-tests.sh www
+#
+# Description:
+#   Requests all defined URLs and checks it contains an expected response header
+#   Exits immediately if any of the tests fail
+
 function smoke {
   local bold=$(tput bold)
   local normal=$(tput sgr0)
